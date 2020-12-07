@@ -1,0 +1,1 @@
+FROM k8s.gcr.io/autoscaling/vpa-admission-controller:0.8.1

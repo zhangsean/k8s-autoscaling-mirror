@@ -1,11 +1,11 @@
 #=================================================
-# https://github.com/zhangsean/k8s-descheduler-mirror
-# Description: Auto check latest descheduler release and tag docker image zhangsean/descheduler using GitHub Actions
+# https://github.com/zhangsean/k8s-autoscaler-mirror
+# Description: Auto check latest autoscaler release and tag docker image zhangsean/autoscaler/ using GitHub Actions
 # License: Apache V2.0
 # Author: ZhangSean
 #=================================================
 
-name: Follow up descheduler release
+name: Follow up autoscaler release
 
 on:
   schedule:
@@ -33,16 +33,16 @@ jobs:
           DEBIAN_FRONTEND: noninteractive
         run: |
           git fetch --tags
-          export CURRENT=$(cat Dockerfile | awk -F: '{print $2}')
+          export CURRENT=$(cat vpn-updater.Dockerfile | awk -F: '{print $2}')
           echo "CURRENT=$CURRENT"
-          export LATEST=$(curl -I https://github.com/kubernetes-sigs/descheduler/releases/latest | sed -n '/tag/s/.*tag\/\(v.*\)./\1/p')
+          export LATEST=$(curl -L https://github.com/kubernetes/autoscaler/raw/master/vertical-pod-autoscaler/deploy/updater-deployment.yaml | sed -n '/image/s/.*vpa-updater:\(.*\)/\1/p')
           echo "LATEST=$LATEST"
           if [ "$LATEST" != "$CURRENT" ]; then
-            echo "New descheduler released: $LATEST"
+            echo "New autoscaler released: $LATEST"
             echo "CURRENT=$CURRENT" >> $GITHUB_ENV
             echo "LATEST=$LATEST" >> $GITHUB_ENV
           else
-            echo "No new descheduler released"
+            echo "No new autoscaler released"
             echo "LATEST=" >> $GITHUB_ENV
           fi
 
@@ -54,10 +54,10 @@ jobs:
         run: |
           echo "Changing tag from $CURRENT to $LATEST"
           sed -i "s/$CURRENT/$LATEST/g" README.md
-          sed -i "s/$CURRENT/$LATEST/g" Dockerfile
+          sed -i "s/$CURRENT/$LATEST/g" *.Dockerfile
           git config user.email zxf2342@qq.com
           git config user.name zhangsean
-          git commit -a -m "Bump to descheduler $LATEST"
+          git commit -a -m "Bump to autoscaler $LATEST"
           git push
 
       - name: Create new release
@@ -69,6 +69,6 @@ jobs:
           tag_name: ${{ env.LATEST }}
           release_name: ${{ env.LATEST }}
           body: |
-            Bump to descheduler ${{ env.LATEST }}
+            Bump to autoscaler ${{ env.LATEST }}
           draft: false
           prerelease: false
