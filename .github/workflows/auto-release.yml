@@ -33,7 +33,7 @@ jobs:
           DEBIAN_FRONTEND: noninteractive
         run: |
           git fetch --tags
-          export CURRENT=$(cat vpn-updater.Dockerfile | awk -F: '{print $2}')
+          export CURRENT=$(cat vpa-updater.Dockerfile | awk -F: '{print $2}')
           echo "CURRENT=$CURRENT"
           export LATEST=$(curl -L https://github.com/kubernetes/autoscaler/raw/master/vertical-pod-autoscaler/deploy/updater-deployment.yaml | sed -n '/image/s/.*vpa-updater:\(.*\)/\1/p')
           echo "LATEST=$LATEST"
