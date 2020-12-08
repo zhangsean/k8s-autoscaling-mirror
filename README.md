@@ -96,11 +96,11 @@ helm install goldilocks --namespace kube-system fairwinds-stable/goldilocks
 # check pods status
 kubectl get po -n kube-system | grep goldilocks
 
-# Enable goldilocks vpa in namespace kube-system
+# Enable goldilocks VPA in namespace kube-system
 kubectl label ns kube-system goldilocks.fairwinds.com/enabled=true
-# After that you should start to see VPA objects in that namespace.
+# After that you will see VPA objects in that namespace.
 kubectl get vpa -n kube-system
-# Get vpa recommended for nginx-ingress-controller
+# Get VPA recommended for nginx-ingress-controller
 kubectl describe vpa -n kube-system nginx-ingress-controller
 ```
 
