@@ -124,7 +124,7 @@ spec:
           servicePort: 8080
 ```
 
-Then open your browser to goldilocks.example.com
+Then open your browser to http://goldilocks.example.com
 
 Once your VPAs are in place, you'll see recommendations appear in the Goldilocks dashboard:
 
