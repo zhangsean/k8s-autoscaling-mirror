@@ -72,3 +72,52 @@ jobs:
             Bump to autoscaler ${{ env.LATEST }}
           draft: false
           prerelease: false
+
+      -
+        name: Set up QEMU
+        uses: docker/setup-qemu-action@v1
+        if: success() && env.LATEST != ''
+      -
+        name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v1
+        if: success() && env.LATEST != ''
+      -
+        name: Login to DockerHub
+        uses: docker/login-action@v1
+        if: success() && env.LATEST != ''
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+      -
+        name: Build and push vpa-admission-controller
+        uses: docker/build-push-action@v2
+        if: success() && env.LATEST != ''
+        with:
+          context: .
+          file: vpa-admission-controller.Dockerfile
+          push: true
+          tags: |
+            zhangsean/vpa-admission-controller:latest,
+            zhangsean/vpa-admission-controller:${{ env.LATEST }}
+      -
+        name: Build and push vpa-recommender
+        uses: docker/build-push-action@v2
+        if: success() && env.LATEST != ''
+        with:
+          context: .
+          file: vpa-recommender.Dockerfile
+          push: true
+          tags: |
+            zhangsean/vpa-recommender:latest,
+            zhangsean/vpa-recommender:${{ env.LATEST }}
+      -
+        name: Build and push vpa-updater
+        uses: docker/build-push-action@v2
+        if: success() && env.LATEST != ''
+        with:
+          context: .
+          file: vpa-updater.Dockerfile
+          push: true
+          tags: |
+            zhangsean/vpa-updater:latest,
+            zhangsean/vpa-updater:${{ env.LATEST }}
