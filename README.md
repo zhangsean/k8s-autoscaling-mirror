@@ -6,9 +6,9 @@ Mirror of `k8s.gcr.io/autoscaling/`.
 
 gcr.io | docker hub
 ---|---
-k8s.gcr.io/autoscaling/vpa-updater:0.9.2 | [zhangsean/vpa-updater:0.9.2](https://hub.docker.com/r/zhangsean/vpa-updater/)
-k8s.gcr.io/autoscaling/vpa-recommender:0.9.2 | [zhangsean/vpa-recommender:0.9.2](https://hub.docker.com/r/zhangsean/vpa-recommender/)
-k8s.gcr.io/autoscaling/vpa-admission-controller:0.9.2 | [zhangsean/vpa-admission-controller:0.9.2](https://hub.docker.com/r/zhangsean/vpa-admission-controller/)
+k8s.gcr.io/autoscaling/vpa-updater:0.9.0 | [zhangsean/vpa-updater:0.9.0](https://hub.docker.com/r/zhangsean/vpa-updater/)
+k8s.gcr.io/autoscaling/vpa-recommender:0.9.0 | [zhangsean/vpa-recommender:0.9.0](https://hub.docker.com/r/zhangsean/vpa-recommender/)
+k8s.gcr.io/autoscaling/vpa-admission-controller:0.9.0 | [zhangsean/vpa-admission-controller:0.9.0](https://hub.docker.com/r/zhangsean/vpa-admission-controller/)
 
 ## Usage
 
@@ -27,7 +27,7 @@ k8s.gcr.io/autoscaling/vpa-admission-controller:0.9.2 | [zhangsean/vpa-admission
 ```sh
 # Set env REGISTRY and TAG
 export REGISTRY=zhangsean
-export TAG=0.9.2
+export TAG=0.9.0
 # Get autoscaling scripts
 git clone https://github.com/kubernetes/autoscaler.git
 cd vertical-pod-autoscaler
