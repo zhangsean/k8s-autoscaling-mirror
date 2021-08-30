@@ -1,1 +1,1 @@
-FROM k8s.gcr.io/autoscaling/vpa-recommender:0.9.0
+FROM k8s.gcr.io/autoscaling/vpa-recommender:0.9.2
